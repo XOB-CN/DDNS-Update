@@ -10,7 +10,7 @@ ddns_password = 'ddns_password'
 router_gateway = '192.168.1.1'
 router_username = 'username'
 router_password = 'password'
-router_wan_name = 'ens160'
+router_wan_name = 'pppoe-wan'
 router_interval = 600
 proxies = {"http":"http://192.168.1.10:8080"}
 ddnsurl = {"dynu.com":"http://api.dynu.com/nic/update?hostname={}&myip={}&username={}&password={}"}
@@ -26,8 +26,8 @@ def main(router_gateway, router_username, router_password, router_wan_name):
     while True:
         stdin, stdout, stderr = ssh.exec_command("ifconfig "+router_wan_name)
         ip_info = stdout.readlines()
-        ip_info = str(ip_info).split('netmask')
-        ip_addr = ip_info[0].split()[-1]
+        ip_info = str(ip_info).split('P-t-P')
+        ip_addr = ip_info[0].split(':')[-1]
 
         if ip_addr != wan_ip_addr:
             update_ddns(ip_addr)
