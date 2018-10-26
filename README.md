@@ -1,4 +1,4 @@
-# DDNS_Update
+# DDNS-Update
 DDNS 更新脚本（基于Python3）
 
 实现原理<br>
